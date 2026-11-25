@@ -34,7 +34,7 @@ sl_agent_server/
 ├── main.py                    # 应用入口点
 ├── application.yml            # 配置文件
 ├── SKILL.md                   # 项目规范文档 (本文件)
-├── ykzh_agent/                     # 智能体核心模块
+├── lingjian_agent/                     # 智能体核心模块
 │   ├── BaseAgent.py          # 基础智能体抽象类
 │   ├── Agents.py             # 智能体注册中心
 │   └── [domain]/             # 业务域智能体
@@ -121,7 +121,7 @@ global_agent_instance = [AgentName]()
 ```
 
 #### Agent注册规范
-在 `ykzh_agent/Agents.py` 中注册：
+在 `lingjian_agent/Agents.py` 中注册：
 ```python
 from agent.risk.RiskControlAgent import risk_control_agent
 from agent.carriage.ComputeCarriageAgent import compute_carriage_agent
@@ -307,10 +307,10 @@ def register_service():
 ## 扩展指南
 
 ### 1. 添加新Agent
-1. 在 `ykzh_agent/[domain]/` 下创建新Agent文件
+1. 在 `lingjian_agent/[domain]/` 下创建新Agent文件
 2. 继承 `BaseAgent` 并实现必需方法
 3. 定义响应数据类
-4. 在 `ykzh_agent/Agents.py` 中注册
+4. 在 `lingjian_agent/Agents.py` 中注册
 5. 添加对应的API路由
 
 ### 2. 添加新API端点

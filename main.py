@@ -1,9 +1,9 @@
 import asyncio
 import selectors
 import uvicorn
-from ykzh_config import config_manager  # 配置管理器
-from ykzh_common import *
-from ykzh_web import app  # FastAPI 应用实例
+from lingjian_config import config_manager  # 配置管理器
+from lingjian_common import *
+from lingjian_web import app  # FastAPI 应用实例
 
 # ========================= 异步主入口 =========================
 async def main():
