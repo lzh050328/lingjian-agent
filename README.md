@@ -1,10 +1,10 @@
-# lingjian-agent (灵鉴 · 智能体服务)
+# ykzh-agent (灵鉴 · 智能体服务)
 
 > 基于 Python + LangChain + LangGraph 的 AI 智能体服务，为物流平台提供智能决策与风控能力。
 
 ## 一、项目简介
 
-**lingjian-agent** 是物流平台的 Python AI 服务层，作为 Java 微服务系统与 LLM 之间的桥梁，提供 10 个智能体的统一管理与调度。
+**ykzh-agent** 是物流平台的 Python AI 服务层，作为 Java 微服务系统与 LLM 之间的桥梁，提供 10 个智能体的统一管理与调度。
 
 **整体架构：** `Java 微服务 → Python AI 服务 → LLM / 机器学习模型`
 
@@ -48,7 +48,7 @@
 └──────────────────────────┬──────────────────────────────────┘
                            │ HTTP / Feign
 ┌──────────────────────────▼──────────────────────────────────┐
-│              Python AI 服务 (lingjian-agent)        │
+│              Python AI 服务 (ykzh-agent)        │
 │  ┌───────────────────────────────────────────────────────┐  │
 │  │                  FastAPI (28001)                       │  │
 │  │  ┌─────────┐  ┌─────────┐  ┌─────────┐  ┌─────────┐ │  │
@@ -67,13 +67,13 @@
 ### 3.2 模块结构
 
 ```
-lingjian-agent/
+ykzh-agent/
 ├── main.py                          # 项目入口
 ├── application.yml                  # 应用配置
 ├── environment.yml                  # Conda 环境依赖
 ├── .env.example                     # 环境变量模板
 │
-├── lingjian_agent/                           # 智能体核心模块
+├── ykzh_agent/                           # 智能体核心模块
 │   ├── BaseAgent.py                 # 智能体基础抽象类
 │   ├── Agents.py                    # 全局智能体注册表
 │   ├── risk/                        # 风控智能体 (1001, 1002)
@@ -190,14 +190,14 @@ conda activate cc_env_31313
 > 模型文件较大，未提交到 Git 仓库，请通过以下方式获取：
 
 **方式一：从课前资料获取**
-- `bert-base-chinese` 预训练模型已在课前资料中提供，解压至 `lingjian_agent/categorie/pretrained_models/` 目录
+- `bert-base-chinese` 预训练模型已在课前资料中提供，解压至 `ykzh_agent/categorie/pretrained_models/` 目录
 
 **方式二：自行训练**
 - 执行训练脚本生成 `saved_model`：
   ```bash
-  python lingjian_agent/categorie/train_bert.py
+  python ykzh_agent/categorie/train_bert.py
   ```
-  训练完成后模型将保存至 `lingjian_agent/categorie/saved_model/` 目录
+  训练完成后模型将保存至 `ykzh_agent/categorie/saved_model/` 目录
 
 ### 6.4 配置环境变量
 
@@ -273,7 +273,7 @@ python main.py
 ### 8.3 Nacos 服务注册
 
 服务启动时自动向 Nacos 注册，关闭时自动注销：
-- 服务名：`lingjian-agent`
+- 服务名：`ykzh-agent`
 - 心跳间隔：10 秒
 - 配置命名空间：`<NACOS_CONFIG_NAMESPACE>`
 - 注册命名空间：`<NACOS_DISCOVERY_NAMESPACE>`
@@ -297,9 +297,9 @@ python main.py
 
 ### 9.1 新增智能体
 
-1. 在 `lingjian_agent/` 目录下创建智能体模块
+1. 在 `ykzh_agent/` 目录下创建智能体模块
 2. 继承 `BaseAgent` 抽象类，实现必要方法
-3. 在 `lingjian_agent/Agents.py` 中注册智能体
+3. 在 `ykzh_agent/Agents.py` 中注册智能体
 4. 在 `application.yml` 中配置对应的 prompt
 
 ### 9.2 Agent ID 规范
@@ -350,4 +350,4 @@ class MyAgent(BaseAgent):
 
 ---
 
-**lingjian-agent** - 让物流更智能 🚚🤖
+**ykzh-agent** - 让物流更智能 🚚🤖

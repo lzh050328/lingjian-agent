@@ -1,4 +1,4 @@
-# AGENTS.md - lingjian-agent (灵鉴智能体服务) 项目指南
+# AGENTS.md - ykzh-agent (灵鉴智能体服务) 项目指南
 
 ## 技术栈
 
@@ -12,13 +12,13 @@
 ## 项目结构
 
 ```
-lingjian-agent/
+ykzh-agent/
 ├── main.py                          # 项目入口，启动 FastAPI + Uvicorn 服务
 ├── application.yml                  # 应用配置文件（YAML 格式）
 ├── environment.yml                  # Conda 环境依赖配置
 ├── .env.example                     # 环境变量模板
 │
-├── lingjian_agent/                           # 智能体核心模块
+├── ykzh_agent/                           # 智能体核心模块
 │   ├── __init__.py
 │   ├── BaseAgent.py                 # 智能体基础抽象类（SSE 流式输出、Redis 停止标记、LLM 初始化）
 │   ├── Agents.py                    # 全局智能体注册表（agentId -> 实例映射）
@@ -211,7 +211,7 @@ pip install -r requirements.txt  # 如果有 requirements.txt
 ### Nacos 服务注册
 
 服务启动时自动向 Nacos 注册，关闭时自动注销：
-- 服务名：`lingjian-agent`
+- 服务名：`ykzh-agent`
 - 心跳间隔：10 秒
 - 配置命名空间：`<NACOS_CONFIG_NAMESPACE>`
 - 注册命名空间：`<NACOS_DISCOVERY_NAMESPACE>`
@@ -235,5 +235,5 @@ pip install -r requirements.txt  # 如果有 requirements.txt
 - **禁止随意删除代码**：不删除现有代码（除非有明确指令），优先在现有代码基础上做增量修改。
 - **最小影响范围**：尽量以最小改动完成需求，不重构无关代码，不改动与任务无关的文件。
 - **保留已有注释**：不对现有注释进行删改。如需补充注释，在已有注释基础上增量添加。
-- **智能体注册**：新增智能体需要在 `lingjian_agent/Agents.py` 中注册，并在 `application.yml` 中配置对应的 prompt。
+- **智能体注册**：新增智能体需要在 `ykzh_agent/Agents.py` 中注册，并在 `application.yml` 中配置对应的 prompt。
 - **Agent ID 规范**：新增智能体 ID 需从 1011 开始递增，避免冲突。
