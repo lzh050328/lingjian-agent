@@ -16,8 +16,8 @@ async def lifespan(app: FastAPI):
 
 # ========================= 创建 FastAPI 实例 =========================
 app = FastAPI(
-    title="SL Agent Web Server",
-    description="智链云途智能体服务",
+    title="Lingjian Agent Web Server",
+    description="灵鉴智能体服务",
     lifespan=lifespan
 )
 
