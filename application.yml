@@ -1,0 +1,92 @@
+server:
+  port: 28001  #服务端口
+  host: 0.0.0.0 #监听所有网络接口
+  logger:
+#    file: logs/app.log
+    level: DEBUG # 日志级别: CRITICAL, ERROR, WARNING, INFO, DEBUG
+
+nacos:
+  server-addr: ${NACOS_ADDR:localhost:8848} # nacos注册中心
+  username: ${NACOS_USERNAME:nacos}
+  password: ${NACOS_PASSWORD:}
+  config:
+    namespace: ${NACOS_CONFIG_NAMESPACE:}
+    group: DEFAULT_GROUP
+  discovery:
+    name: lingjian-agent
+    namespace: ${NACOS_DISCOVERY_NAMESPACE:}
+    ip: ${SERVICE_IP:127.0.0.1}
+
+ai:
+  openai:
+    model: ${AI_OPENAI_MODEL}
+    api-key: ${AI_OPENAI_API_KEY}
+    base-url: ${AI_OPENAI_BASE_URL}
+    temperature: ${AI_OPENAI_TEMPERATURE}
+    timeout: ${AI_OPENAI_TIMEOUT}
+    max-tokens: ${AI_OPENAI_MAX_TOKENS}
+    use-max-tokens: ${AI_OPENAI_USE_MAX_TOKENS}
+  dispatch: # AI 调度模型配置
+    model:
+      enabled: true
+      mode: mock  # mock/real
+      path:
+        mock: lingjian_agent/dispatch/transport_task/models/mock_model.pkl
+        real: lingjian_agent/dispatch/transport_task/models/real_model.pkl
+
+prompt:
+  risk: risk-agent-system-message.txt
+  refresh-token-risk: refresh-token-risk-agent-system-message.txt
+  compute: compute-agent-system-message.txt
+  parcel-item-check: parcel-item-check-agent-system-message.txt
+  organ-type: organ-type-agent-system-message.txt
+  cost-factor: cost-factor-agent-system-message.txt
+  address-analysis: address-analysis-agent-system-message.txt
+  station-fact: station-fact-agent-system-message.txt
+  reason-generation: reason-generation-agent-system-message.txt
+  courier-dispatch: courier-dispatch-agent-system-message.txt
+
+# Redis 配置
+redis:
+  host: ${REDIS_HOST:localhost}
+  port: ${REDIS_PORT:6379}
+  password: ${REDIS_PASSWORD:}
+
+# RabbitMQ 配置
+rabbitmq:
+  host: ${RABBITMQ_HOST:localhost}
+  port: ${RABBITMQ_PORT:5672}
+  username: ${RABBITMQ_USERNAME:guest}
+  password: ${RABBITMQ_PASSWORD:}
+  vhost: ${RABBITMQ_VHOST:/dispatch}
+  aigc:
+    exchange: cc.exchange.topic.aigc
+    queue:
+      dispatchTrain: cc.queue.aigc.dispatch.train
+    routingKey:
+      create: CREATE
+      complete: COMPLETE
+
+# MongoDB 配置
+mongo:
+  uri: ${MONGO_URI:mongodb://localhost:27017}
+  database:
+    ccAi: cc_ai
+  collection:
+    dispatchDecisionRecord: dispatch_decision_record
+    dispatchDecisionRecordMock: dispatch_decision_record_mock
+
+# 业务系统微服务配置
+cc:
+  services:
+    base: chain-cloud-ms-base
+    carriage: chain-cloud-ms-carriage
+    service-scope: chain-cloud-ms-service-scope
+    transport: chain-cloud-ms-transport
+    courier: chain-cloud-ms-courier
+
+# 高德MCP服务配置
+mcp-servers:
+  - name: amap_mcp
+    transport: streamable_http
+    url: ${AMAP_MCP_URL}
